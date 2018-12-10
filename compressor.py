@@ -93,12 +93,24 @@ class Compressor:
 
     def quantize(self):
         dct_images = self.compute_dct()
+        if self.mode == 16:
+            quantization_matrix = np.empty((self.mode, self.mode), dtype=int)
+            for i in range(8):
+                for j in range(8):
+                    quantization_matrix[2 * i][2 * j] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i + 1][2 * j] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i][2 * j + 1] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i + 1][2 * j + 1] = self.jpeg_lq_matrix[i][j]
+            print(quantization_matrix)
+        else:
+            quantization_matrix = self.jpeg_lq_matrix
+
         quantized_images = []
         for image in dct_images:
             quantized_image = np.empty((self.mode, self.mode), dtype=int)
             for i in range(self.mode):
                 for j in range(self.mode):
-                    quantized_image[i][j] = round(image[i][j] / self.jpeg_lq_matrix[i][j])
+                    quantized_image[i][j] = round(image[i][j] / quantization_matrix[i][j])
             quantized_images.append(quantized_image)
         print(quantized_images)
         return quantized_images
@@ -119,7 +131,7 @@ class Compressor:
 #     return res
 
 if __name__ == '__main__':
-    compressor = Compressor("Kodak08gray.bmp", 8)
+    compressor = Compressor("Kodak08gray.bmp", 16)
     compressor.construct_dct()
     compressor.quantize()
     print("Welcome to my image compressor!")
