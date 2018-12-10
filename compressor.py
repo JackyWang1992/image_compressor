@@ -115,6 +115,20 @@ class Compressor:
         print(quantized_images)
         return quantized_images
 
+    def zig_zag_matrix(self):
+        quantized_images = self.quantize()
+        lst = []
+        for q_m in quantized_images:
+            z = []
+            n = self.mode
+            for i in range(2 * (n - 1) + 1):
+                bound = 0 if i < n else i - n + 1
+                for j in range(bound, i-bound + 1):
+                    z.append(q_m[j][i - j] if i % 2 != 0 else q_m[i - j][j])
+            lst.append(z)
+        print(lst)
+        return lst
+
 
 # def dct_construct(mode):
 #
@@ -131,7 +145,7 @@ class Compressor:
 #     return res
 
 if __name__ == '__main__':
-    compressor = Compressor("Kodak08gray.bmp", 16)
+    compressor = Compressor("Kodak08gray.bmp", 8)
     compressor.construct_dct()
-    compressor.quantize()
+    compressor.zig_zag_matrix()
     print("Welcome to my image compressor!")
