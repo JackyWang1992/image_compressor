@@ -11,11 +11,11 @@ import sys
 class Compressor:
     def __init__(self, file_name, mode):
         self.im = Image.open(file_name)
-        self.mm = np.int_(np.array(self.im))
-        # self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-        #                     [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50],
-        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50]])
+        # self.mm = np.int_(np.array(self.im))
+        self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
+                            [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
+                            [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50],
+                            [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50]])
         self.jpeg_lq_matrix = [[16, 11, 10, 16, 24, 40, 51, 61], [12, 12, 14, 19, 26, 58, 60, 55],
                                [14, 13, 16, 24, 40, 57, 69, 56], [14, 17, 22, 29, 51, 87, 80, 62],
                                [18, 22, 37, 56, 68, 109, 103, 77], [24, 35, 55, 64, 81, 104, 113, 92],
@@ -135,23 +135,9 @@ class Compressor:
         lst = self.zig_zag_matrix()
 
         with open('out.csv', 'w') as f:
-            wr = csv.writer(f)
+            wr = csv.writer(f, delimiter=' ')
             wr.writerows(lst)
 
-
-# def dct_construct(mode):
-#
-#
-#
-#
-# def 2dct(sub_images):
-#     res = []
-#     for sub_image in sub_images:
-#         transport = np.transpose(sub_image)
-#         d = dct_compute(sub_image)
-#         td = dct_compute(transport)
-#         res[].append(d * sub_image * td)
-#     return res
 
 if __name__ == '__main__':
     print("Welcome to my image compressor!")
