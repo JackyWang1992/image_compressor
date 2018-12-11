@@ -5,6 +5,7 @@ from math import ceil
 from math import cos
 from math import pi
 import csv
+import sys
 
 
 class Compressor:
@@ -153,7 +154,7 @@ class Compressor:
 #     return res
 
 if __name__ == '__main__':
-    compressor = Compressor("Kodak08gray.bmp", 8)
+    print("Welcome to my image compressor!")
+    compressor = Compressor(sys.argv[1], int(sys.argv[2]))
     compressor.construct_dct()
     compressor.write_file()
-    print("Welcome to my image compressor!")
