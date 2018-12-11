@@ -1,5 +1,9 @@
 import numpy as np
 import sys
+from math import sqrt
+from math import ceil
+from math import cos
+from math import pi
 
 
 class DeCompressor:
@@ -51,8 +55,48 @@ class DeCompressor:
         print(sub_images)
         return sub_images
 
+    def restore_from_q(self):
+        sub_images = self.de_zig_zag()
+        n = self.mode
+        if n == 16:
+            quantization_matrix = np.empty((n, n), dtype=int)
+            for i in range(8):
+                for j in range(8):
+                    quantization_matrix[2 * i][2 * j] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i + 1][2 * j] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i][2 * j + 1] = self.jpeg_lq_matrix[i][j]
+                    quantization_matrix[2 * i + 1][2 * j + 1] = self.jpeg_lq_matrix[i][j]
+            print(quantization_matrix)
+        else:
+            quantization_matrix = self.jpeg_lq_matrix
+
+        dct_images = []
+        for image in sub_images:
+            dct_image = np.empty((n, n), dtype=int)
+            for i in range(n):
+                for j in range(n):
+                    dct_image[i][j] = image[i][j] * quantization_matrix[i][j]
+            dct_images.append(dct_image)
+        print(dct_images)
+        return dct_images
+
+    def construct_dct(self):
+        mode = self.mode
+        for i in range(mode):
+            for j in range(mode):
+                if i == 0:
+                    self.dct_matrix[i][j] = sqrt(1.0 / mode) * cos(((2 * j + 1) * i) / (2 * mode) * pi)
+                else:
+                    self.dct_matrix[i][j] = sqrt(2.0 / mode) * cos(((2 * j + 1) * i) / (2 * mode) * pi)
+        self.i_dct_matrix = self.dct_matrix.transpose()
+        print("dct_matrix")
+        print(self.dct_matrix)
+        print("i_dct_matrix")
+        print(self.i_dct_matrix)
+
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
     decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]))
-    decompressor.de_zig_zag()
+    decompressor.restore_from_q()
+    decompressor.construct_dct()
