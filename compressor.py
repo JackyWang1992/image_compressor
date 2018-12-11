@@ -4,16 +4,17 @@ from math import sqrt
 from math import ceil
 from math import cos
 from math import pi
+import csv
 
 
 class Compressor:
     def __init__(self, file_name, mode):
         self.im = Image.open(file_name)
-        # self.mm = np.int_(np.array(self.im))
-        self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-                            [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-                            [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50],
-                            [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50]])
+        self.mm = np.int_(np.array(self.im))
+        # self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
+        #                     [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
+        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50],
+        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50]])
         self.jpeg_lq_matrix = [[16, 11, 10, 16, 24, 40, 51, 61], [12, 12, 14, 19, 26, 58, 60, 55],
                                [14, 13, 16, 24, 40, 57, 69, 56], [14, 17, 22, 29, 51, 87, 80, 62],
                                [18, 22, 37, 56, 68, 109, 103, 77], [24, 35, 55, 64, 81, 104, 113, 92],
@@ -123,11 +124,18 @@ class Compressor:
             n = self.mode
             for i in range(2 * (n - 1) + 1):
                 bound = 0 if i < n else i - n + 1
-                for j in range(bound, i-bound + 1):
+                for j in range(bound, i - bound + 1):
                     z.append(q_m[j][i - j] if i % 2 != 0 else q_m[i - j][j])
             lst.append(z)
         print(lst)
         return lst
+
+    def write_file(self):
+        lst = self.zig_zag_matrix()
+
+        with open('out.csv', 'w') as f:
+            wr = csv.writer(f)
+            wr.writerows(lst)
 
 
 # def dct_construct(mode):
@@ -147,5 +155,5 @@ class Compressor:
 if __name__ == '__main__':
     compressor = Compressor("Kodak08gray.bmp", 8)
     compressor.construct_dct()
-    compressor.zig_zag_matrix()
+    compressor.write_file()
     print("Welcome to my image compressor!")
