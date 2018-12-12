@@ -29,6 +29,7 @@ high_jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
 
 class DeCompressor:
     def __init__(self, fname, mode, quality):
+        self.fname = fname.split('.')[0]
         with open(fname) as f:
             content = f.readlines()
         content = [x.strip() for x in content]
@@ -160,7 +161,7 @@ class DeCompressor:
     def write_to_pic(self):
         matrix = self.level_shift()
         img = Image.fromarray(np.uint8(matrix), 'L')
-        img.save('restore.bmp')
+        img.save(self.fname + 'restore.bmp')
         img.show()
 
 

@@ -51,6 +51,7 @@ test_matrix = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 2
 
 class Compressor:
     def __init__(self, file_name, mode, quality):
+        self.file_name = file_name.split('.')[0]
         self.im = Image.open(file_name)
         self.mm = np.int_(np.array(self.im))
         # choose the quality of compressed pictures
@@ -175,7 +176,7 @@ class Compressor:
     def write_file(self):
         lst = self.zig_zag_matrix()
 
-        with open('out.csv', 'w') as f:
+        with open(self.file_name + 'out.csv', 'w') as f:
             wr = csv.writer(f, delimiter=' ')
             wr.writerow([self.num_rows, self.num_cols])
             wr.writerows(lst)
