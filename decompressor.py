@@ -129,6 +129,12 @@ class DeCompressor:
     def level_shift(self):
         matrix = self.stack_matrix()
         matrix = matrix + 128
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] < 0:
+                    matrix[i][j] = 0
+                elif matrix[i][j] > 255:
+                    matrix[i][j] = 255
         # test
         print(matrix)
         return matrix
