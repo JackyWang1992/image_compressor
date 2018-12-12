@@ -5,9 +5,30 @@ from math import cos
 from math import pi
 from PIL import Image
 
+"""
+this compressor support three quality level:  low (PSNR = 30), medium (PSNR = 40), and high (PSNR = 50)
+I use three corresponding luminance quantization matrix to support this three quality levels
+by default, the compressor uses medium quality
+"""
+# the luminance quantization matrix with low-quality: PSNR = 30
+low_jpeg_lq_matrix = [[16, 11, 10, 16, 24, 40, 51, 61], [12, 12, 14, 19, 26, 58, 60, 55],
+                      [14, 13, 16, 24, 40, 57, 69, 56], [14, 17, 22, 29, 51, 87, 80, 62],
+                      [18, 22, 37, 56, 68, 109, 103, 77], [24, 35, 55, 64, 81, 104, 113, 92],
+                      [49, 64, 78, 87, 103, 121, 120, 101], [72, 92, 95, 98, 112, 100, 103, 99]]
+# the luminance quantization matrix with medium-quality: PSNR = 40
+medium_jpeg_lq_matrix = [[2, 2, 3, 4, 5, 6, 8, 11], [2, 2, 2, 4, 5, 7, 9, 11],
+                         [3, 2, 3, 5, 7, 9, 11, 12], [4, 4, 5, 7, 9, 11, 12, 12],
+                         [5, 5, 7, 9, 11, 12, 12, 12], [6, 7, 9, 11, 12, 12, 12, 12],
+                         [8, 9, 11, 12, 12, 12, 12, 12], [11, 12, 12, 12, 12, 12, 12, 12]]
+# the luminance quantization matrix with high-quality: PSNR = 50
+high_jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
+                       [1, 1, 1, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 2, 2, 3],
+                       [1, 1, 1, 1, 2, 2, 3, 3], [1, 1, 2, 2, 3, 3, 3, 3],
+                       [1, 1, 2, 2, 3, 3, 3, 3], [2, 2, 2, 3, 3, 3, 3, 3]]
+
 
 class DeCompressor:
-    def __init__(self, fname, mode):
+    def __init__(self, fname, mode, quality):
         with open(fname) as f:
             content = f.readlines()
         content = [x.strip() for x in content]
@@ -15,22 +36,12 @@ class DeCompressor:
         self.num_cols = int(content[0].split()[1])
         content = content[1:]
         self.zig_zag_list = [lst.split() for lst in content]
-        # self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-        #                     [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
-        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50],
-        #                     [200, 200, 200, 200, 50, 50, 50, 50], [200, 200, 200, 200, 50, 50, 50, 50]])
-        # self.jpeg_lq_matrix = [[16, 11, 10, 16, 24, 40, 51, 61], [12, 12, 14, 19, 26, 58, 60, 55],
-        #                        [14, 13, 16, 24, 40, 57, 69, 56], [14, 17, 22, 29, 51, 87, 80, 62],
-        #                        [18, 22, 37, 56, 68, 109, 103, 77], [24, 35, 55, 64, 81, 104, 113, 92],
-        #                        [49, 64, 78, 87, 103, 121, 120, 101], [72, 92, 95, 98, 112, 100, 103, 99]]
-        self.jpeg_lq_matrix = [[2, 2, 3, 4, 5, 6, 8, 11], [2, 2, 2, 4, 5, 7, 9, 11],
-                               [3, 2, 3, 5, 7, 9, 11, 12], [4, 4, 5, 7, 9, 11, 12, 12],
-                               [5, 5, 7, 9, 11, 12, 12, 12], [6, 7, 9, 11, 12, 12, 12, 12],
-                               [8, 9, 11, 12, 12, 12, 12, 12], [11, 12, 12, 12, 12, 12, 12, 12]]
-        # self.jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
-        #                        [1, 1, 1, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 2, 2, 3],
-        #                        [1, 1, 1, 1, 2, 2, 3, 3], [1, 1, 2, 2, 3, 3, 3, 3],
-        #                        [1, 1, 2, 2, 3, 3, 3, 3], [2, 2, 2, 3, 3, 3, 3, 3]]
+        if quality == 0:
+            self.jpeg_lq_matrix = low_jpeg_lq_matrix
+        elif quality == 2:
+            self.jpeg_lq_matrix = high_jpeg_lq_matrix
+        else:
+            self.jpeg_lq_matrix = medium_jpeg_lq_matrix
         self.mode = mode
         self.dct_matrix = np.empty((mode, mode), dtype=float)
         self.i_dct_matrix = np.empty((mode, mode), dtype=float)
@@ -128,7 +139,7 @@ class DeCompressor:
         sub_images = self.restore_from_dct()
         for i in range(int(rows / mode)):
             for j in range(int(cols / mode)):
-                whole_matrix[i * mode:(i + 1) * mode, j * mode:(j + 1) * mode] = sub_images[i * int(cols/mode) + j]
+                whole_matrix[i * mode:(i + 1) * mode, j * mode:(j + 1) * mode] = sub_images[i * int(cols / mode) + j]
         # test
         print(whole_matrix)
         return whole_matrix
@@ -155,9 +166,6 @@ class DeCompressor:
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
-    decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]))
+    decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     decompressor.construct_dct()
-    # decompressor.restore_from_dct()
-    # decompressor.stack_matrix()
-    # decompressor.level_shift()
     decompressor.write_to_pic()

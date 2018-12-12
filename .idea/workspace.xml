@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3461e5f1-7fed-494b-b51c-08042031da02" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compressor.py" beforeDir="false" afterPath="$PROJECT_DIR$/compressor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/decompressor.py" beforeDir="false" afterPath="$PROJECT_DIR$/decompressor.py" afterDir="false" />
     </list>
@@ -22,11 +23,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compressor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="826">
-              <caret line="41" column="84" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="41" selection-end-column="84" />
+            <state relative-caret-position="152">
+              <caret line="28" column="74" lean-forward="true" selection-start-line="9" selection-end-line="28" selection-end-column="74" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -51,11 +52,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decompressor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="28" column="96" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="28" selection-end-column="96" />
+            <state relative-caret-position="-1356">
+              <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -84,16 +85,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/psnr_analysis.py" />
-        <option value="$PROJECT_DIR$/decompressor.py" />
         <option value="$PROJECT_DIR$/compressor.py" />
+        <option value="$PROJECT_DIR$/decompressor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
-    <option name="y" value="-132" />
-    <option name="width" value="1216" />
-    <option name="height" value="1896" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -198,18 +199,18 @@
       <workItem from="1544506040246" duration="8553000" />
       <workItem from="1544549960069" duration="211000" />
       <workItem from="1544562186892" duration="9185000" />
-      <workItem from="1544571500046" duration="17528000" />
+      <workItem from="1544571500046" duration="21037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76226000" />
+    <option name="totallyTimeSpent" value="79735000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-132" width="1216" height="1896" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12889273" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09986595" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -257,7 +258,7 @@
     <entry file="file://$PROJECT_DIR$/Kodak08gray.bmp">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/restore.bmp">
+    <entry file="file://$PROJECT_DIR$/Kodak09.bmp">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/psnr_analysis.py">
@@ -270,22 +271,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decompressor.py">
+    <entry file="file://$PROJECT_DIR$/compressor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="28" column="96" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="28" selection-end-column="96" />
+        <state relative-caret-position="152">
+          <caret line="28" column="74" lean-forward="true" selection-start-line="9" selection-end-line="28" selection-end-column="74" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/compressor.py">
+    <entry file="file://$PROJECT_DIR$/restore.bmp">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decompressor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="826">
-          <caret line="41" column="84" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="41" selection-end-column="84" />
+        <state relative-caret-position="-1356">
+          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
