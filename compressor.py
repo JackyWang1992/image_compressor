@@ -181,9 +181,17 @@ class Compressor:
             wr.writerow([self.num_rows, self.num_cols])
             wr.writerows(lst)
 
+    def scale_lq_mtx(self):
+        matrix = self.jpeg_lq_matrix
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                matrix[i][j] = matrix[i][j] * 5
+        self.jpeg_lq_matrix = matrix
+
 
 if __name__ == '__main__':
     print("Welcome to my image compressor!")
     compressor = Compressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    compressor.scale_lq_mtx()
     compressor.construct_dct()
     compressor.write_file()

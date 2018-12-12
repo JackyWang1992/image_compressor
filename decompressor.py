@@ -42,6 +42,7 @@ high_jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
                        [1, 1, 1, 1, 2, 2, 3, 3], [1, 1, 2, 2, 3, 3, 3, 3],
                        [1, 1, 2, 2, 3, 3, 3, 3], [2, 2, 2, 3, 3, 3, 3, 3]]
 
+
 class DeCompressor:
     def __init__(self, fname, mode, quality):
         self.fname = fname.split('.')[0]
@@ -178,9 +179,17 @@ class DeCompressor:
         img = Image.fromarray(np.uint8(matrix), 'L')
         img.save(self.fname + 'restore.bmp')
 
+    def scale_lq_mtx(self):
+        matrix = self.jpeg_lq_matrix
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                matrix[i][j] = matrix[i][j] * 5
+        self.jpeg_lq_matrix = matrix
+
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
     decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    decompressor.scale_lq_mtx()
     decompressor.construct_dct()
     decompressor.write_to_pic()
