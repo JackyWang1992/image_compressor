@@ -4,6 +4,7 @@ from math import sqrt
 from math import ceil
 from math import cos
 from math import pi
+from PIL import Image
 
 
 class DeCompressor:
@@ -11,6 +12,9 @@ class DeCompressor:
         with open(fname) as f:
             content = f.readlines()
         content = [x.strip() for x in content]
+        self.num_rows = int(content[0].split()[0])
+        self.num_cols = int(content[0].split()[1])
+        content = content[1:]
         self.zig_zag_list = [lst.split() for lst in content]
         # self.mm = np.array([[50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
         #                     [50, 50, 50, 50, 200, 200, 200, 200], [50, 50, 50, 50, 200, 200, 200, 200],
@@ -24,7 +28,7 @@ class DeCompressor:
         self.dct_matrix = np.empty((mode, mode), dtype=float)
         self.i_dct_matrix = np.empty((mode, mode), dtype=float)
         # test
-        print(self.zig_zag_list[0])
+        # print(self.zig_zag_list[0])
 
     def zig_zag_model(self):
         model_m = np.empty((self.mode, self.mode), dtype=int)
@@ -38,7 +42,8 @@ class DeCompressor:
                     model_m[j, i - j] = index
                 else:
                     model_m[i - j, j] = index
-        print(model_m)
+        # test
+        # print(model_m)
         return model_m
 
     def de_zig_zag(self):
@@ -52,7 +57,8 @@ class DeCompressor:
                 for j in range(n):
                     mtrx[i][j] = lst[model_lst[i][j]]
             sub_images.append(mtrx)
-        print(sub_images)
+        # test
+        # print(sub_images)
         return sub_images
 
     def restore_from_q(self):
@@ -66,7 +72,8 @@ class DeCompressor:
                     quantization_matrix[2 * i + 1][2 * j] = self.jpeg_lq_matrix[i][j]
                     quantization_matrix[2 * i][2 * j + 1] = self.jpeg_lq_matrix[i][j]
                     quantization_matrix[2 * i + 1][2 * j + 1] = self.jpeg_lq_matrix[i][j]
-            print(quantization_matrix)
+            # test
+            # print(quantization_matrix)
         else:
             quantization_matrix = self.jpeg_lq_matrix
 
@@ -77,7 +84,8 @@ class DeCompressor:
                 for j in range(n):
                     dct_image[i][j] = image[i][j] * quantization_matrix[i][j]
             dct_images.append(dct_image)
-        print(dct_images)
+        # test
+        # print(dct_images)
         return dct_images
 
     def construct_dct(self):
@@ -89,14 +97,54 @@ class DeCompressor:
                 else:
                     self.dct_matrix[i][j] = sqrt(2.0 / mode) * cos(((2 * j + 1) * i) / (2 * mode) * pi)
         self.i_dct_matrix = self.dct_matrix.transpose()
-        print("dct_matrix")
-        print(self.dct_matrix)
-        print("i_dct_matrix")
-        print(self.i_dct_matrix)
+        # test
+        # print("dct_matrix")
+        # print(self.dct_matrix)
+        # print("i_dct_matrix")
+        # print(self.i_dct_matrix)
+
+    def restore_from_dct(self):
+        dct_images = self.restore_from_q()
+        sub_images = []
+        for image in dct_images:
+            restored_image = np.matmul(np.matmul(self.i_dct_matrix, image), self.dct_matrix)
+            sub_images.append(restored_image.astype(int))
+        # test
+        # print(sub_images)
+        return sub_images
+
+    def stack_matrix(self):
+        rows = self.num_rows
+        cols = self.num_cols
+        mode = self.mode
+        whole_matrix = np.zeros((rows, cols), dtype=int)
+        sub_images = self.restore_from_dct()
+        for i in range(int(rows / mode)):
+            for j in range(int(cols / mode)):
+                whole_matrix[i * mode:(i + 1) * mode, j * mode:(j + 1) * mode] = sub_images[i * int(cols/mode) + j]
+        # test
+        print(whole_matrix)
+        return whole_matrix
+
+    def level_shift(self):
+        matrix = self.stack_matrix()
+        matrix = matrix + 128
+        # test
+        print(matrix)
+        return matrix
+
+    def write_to_pic(self):
+        matrix = self.level_shift()
+        img = Image.fromarray(np.uint8(matrix), 'L')
+        img.save('restore.bmp')
+        img.show()
 
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
     decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]))
-    decompressor.restore_from_q()
     decompressor.construct_dct()
+    # decompressor.restore_from_dct()
+    # decompressor.stack_matrix()
+    # decompressor.level_shift()
+    decompressor.write_to_pic()
