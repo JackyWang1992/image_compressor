@@ -1,7 +1,6 @@
 import numpy as np
 import sys
 from math import sqrt
-from math import ceil
 from math import cos
 from math import pi
 from PIL import Image
