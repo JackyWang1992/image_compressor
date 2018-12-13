@@ -27,15 +27,15 @@ by default, the compressor uses medium quality
 #                        [1, 1, 2, 2, 3, 3, 3, 3], [2, 2, 2, 3, 3, 3, 3, 3]]
 
 # the luminance quantization matrix with low-quality: PSNR = 30
-low_jpeg_lq_matrix = [[16, 11, 10, 16, 24, 40, 51, 61], [12, 12, 14, 19, 26, 58, 60, 55],
-                      [14, 13, 16, 24, 40, 57, 69, 56], [14, 17, 22, 29, 51, 87, 80, 62],
-                      [18, 22, 37, 56, 68, 109, 103, 77], [24, 35, 55, 64, 81, 104, 113, 92],
-                      [49, 64, 78, 87, 103, 121, 120, 101], [72, 92, 95, 98, 112, 100, 103, 99]]
+low_jpeg_lq_matrix = [[52, 53, 71, 101, 86, 39, 34, 17], [53, 56, 68, 67, 28, 23, 12, 12],
+                      [71, 68, 67, 48, 23, 12, 12, 12], [101, 67, 48, 23, 12, 12, 12, 12],
+                      [86, 48, 23, 12, 12, 12, 12, 12], [49, 43, 12, 12, 12, 12, 12, 12],
+                      [44, 12, 12, 12, 12, 12, 12, 12], [17, 12, 12, 12, 12, 12, 12, 12]]
 # the luminance quantization matrix with medium-quality: PSNR = 40
-medium_jpeg_lq_matrix = [[2, 2, 3, 4, 5, 6, 8, 11], [2, 2, 2, 4, 5, 7, 9, 11],
-                         [3, 2, 3, 5, 7, 9, 11, 12], [4, 4, 5, 7, 9, 11, 12, 12],
-                         [5, 5, 7, 9, 11, 12, 12, 12], [6, 7, 9, 11, 12, 12, 12, 12],
-                         [8, 9, 11, 12, 12, 12, 12, 12], [11, 12, 12, 12, 12, 12, 12, 12]]
+medium_jpeg_lq_matrix = [[4, 3, 4, 7, 9, 11, 14, 17], [3, 3, 4, 7, 9, 12, 12, 12],
+                         [4, 4, 5, 9, 12, 12, 12, 12], [7, 7, 9, 12, 12, 12, 12, 12],
+                         [9, 9, 12, 12, 12, 12, 12, 12], [11, 12, 12, 12, 12, 12, 12, 12],
+                         [14, 12, 12, 12, 12, 12, 12, 12], [17, 12, 12, 12, 12, 12, 12, 12]]
 # the luminance quantization matrix with high-quality: PSNR = 50
 high_jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
                        [1, 1, 1, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 2, 2, 3],
@@ -190,6 +190,6 @@ class DeCompressor:
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
     decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-    decompressor.scale_lq_mtx()
+    # decompressor.scale_lq_mtx()
     decompressor.construct_dct()
     decompressor.write_to_pic()
