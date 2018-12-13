@@ -23,30 +23,21 @@ __Contributors:__
    it's also a python project and don't have to compile
 
 ## how to use it? 
-###(all files in the example are in the same folder with program and need to uncomment the complete mode in the main at the bottom and comment the test script mode)
 
 1. follow this instruction to play with this tool! :)
 
 2. to compress(lossy) the image file, just type like below:
   the first parameter is the filename, the second parameter is block size (8 * 8) or (16 * 16), the last 
   parameter is the quality, (0 - low (PSNR = 30), 1-medium(PSNR=40), 2-high (PSNR = 50))
-  to simplicity in the test script, by default, I commented this function in the main and just use filename as 
-  the only parameter.
     ```bash
-    python3 compressor.py Kodak08gray.bmp 8 1 # complete mode
-    ```
-    ```bash
-    python3 compressor.py Kodak08gray.bmp  # test script mode
+    python3 compressor.py Kodak08gray.bmp 8 1
     ```
 3. after compression, the compressed file is called: XXXout.csv
     
 4. then you can use XXXout.csv to do the loss compress the file follow the same way of compression
-      ```bash
-    python3 decompressor.py Kodak08grayout.csv 8 1 # complete mode
-    ```
-    ```bash
-    python3 compressor.py Kodak08grayout.csv  # test script mode
-    ```
+     ```bash
+    python3 decompressor.py Kodak08grayout.csv 8 1
+     ```
     
 5. the decompressed file is called: XXXrestore.bmp
 

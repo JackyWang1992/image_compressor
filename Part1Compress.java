@@ -18,12 +18,12 @@ class Part1Compress {
     dc.compress();
     List<Short> output = dc.getResult();
     DataOutputStream os = new DataOutputStream(new FileOutputStream(
-            filename.split(Pattern.quote("."))[0] + "-" + "compressed.dat"));
+            filename.split(Pattern.quote("."))[0] + ".dat"));
     for (short s : output) {
         os.writeShort(s);
     }
     os.close();
     System.out.print(Message.NEW_COMMAND);
-    System.out.printf(Message.COMPRESS_FINISH.toString(), filename.split(Pattern.quote("."))[0] + "-" + "compressed.dat");
+    System.out.printf(Message.COMPRESS_FINISH.toString(), filename.split(Pattern.quote("."))[0] + ".dat");
   }
 }

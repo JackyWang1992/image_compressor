@@ -10,8 +10,8 @@
 #Change cat to your Part 2 encoder and decoder and bzip2 to your Part 1 encoder and decoder.
 Part1C="java Part1Compress"
 Part1D="java Part1Decompress"
-Part2C="python3 compressor"
-Part2D="python3 decompressor"
+Part2C="python3 compressor.py"
+Part2D="python3 decompressor.py"
 #
 #Creat sub-sirectories to store results:
 mkdir COMPRESS
@@ -27,14 +27,19 @@ mkdir PART2112D
 echo ''; echo 'Compress, decompress, check lossless portion for differences:'
 for file in Kodak08gray Kodak09gray Kodak12gray Kodak18gray Kodak21gray Kodak22gray
 do
-cat Kodak/"$file.bmp" | $Part2C > PART2C/$file
-cat PART2C/$file | $Part2D > PART2D/"$file.bmp"
-cat PART2C/$file | $Part1C > Part21C/$file
-cat PART21C/$file | $Part1D > PART211D/$file
-cat PART211D/$file | $Part2D > PART2112D/"$file.bmp"
-cat Part2C/$file | compress > COMPRESS/$file
-cat Part2C/$file | gzip > GZIP/$file
-echo "Check $file lossless portion for differences:"; diff Part2C/$file Part211D/$file
+    $Part2C Kodak/"$file.bmp" 8 1
+    mv "$file.csv" PART2C/
+    $Part2D PART2C/"$file.csv" 8 1
+    mv "$file.bmp" PART2D/
+    $Part1C PART2C/"$file.csv" 0 0
+    mv PART2C/"$file.dat" PART21C/
+    $Part1D PART21C/"$file.dat" 0 0
+    mv PART21C/"$file.csv" PART211D/
+    $Part2D PART211D/"$file.csv" 8 1
+    mv "$file.bmp" PART2112D/
+    cat PART2C/"$file.csv" | compress > COMPRESS/$file
+    cat PART2C/"$file.csv" | gzip > GZIP/$file
+    echo "Check $file lossless portion for differences:"; diff PART2C/"$file.csv" PART211D/"$file.csv"
 done
 #
 echo''; echo 'Original file sizes:'

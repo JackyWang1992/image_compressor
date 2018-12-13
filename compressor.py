@@ -73,7 +73,7 @@ class Compressor:
 
     def shift_image(self):
         matrix = self.mm
-        print(matrix)
+        # print(matrix)
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 matrix[i][j] = matrix[i][j] - 128
@@ -107,7 +107,7 @@ class Compressor:
                 sliced_images.append(new_mm[i:i + mode, j:j + mode])
         # test
         # print(sliced_images[0])
-        print(len(sliced_images))
+        # print(len(sliced_images))
         return sliced_images
 
     def construct_dct(self):
@@ -122,7 +122,7 @@ class Compressor:
         # print("dct_matrix")
         # print(self.dct_matrix)
         # print("i_dct_matrix")
-        print(self.i_dct_matrix)
+        # print(self.i_dct_matrix)
 
     def compute_dct(self):
         sliced_images = self.sub_images()
@@ -177,7 +177,7 @@ class Compressor:
     def write_file(self):
         lst = self.zig_zag_matrix()
 
-        with open(self.file_name + 'out.csv', 'w') as f:
+        with open(self.file_name + '.csv', 'w') as f:
             wr = csv.writer(f, delimiter=' ')
             wr.writerow([self.num_rows, self.num_cols])
             wr.writerows(lst)
@@ -192,10 +192,7 @@ class Compressor:
 
 if __name__ == '__main__':
     print("Welcome to my image compressor!")
-    # complete mode : can choose block size and picture quality
-    # compressor = Compressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-    # test script mode: just for bash
-    compressor = Compressor(sys.argv[1], 8, 1)
+    compressor = Compressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     # compressor.scale_lq_mtx()
     compressor.construct_dct()
     compressor.write_file()

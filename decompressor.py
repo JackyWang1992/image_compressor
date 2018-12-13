@@ -30,7 +30,7 @@ high_jpeg_lq_matrix = [[1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 2],
 class DeCompressor:
     def __init__(self, fname, mode, quality):
         # self.fname = fname.split('.')[0]
-        self.file_name = fname.split('/')[-1].split('.')[0]
+        self.fname = fname.split('/')[-1].split('.')[0]
         with open(fname) as f:
             content = f.readlines()
         content = [x.strip() for x in content]
@@ -143,7 +143,7 @@ class DeCompressor:
             for j in range(int(cols / mode)):
                 whole_matrix[i * mode:(i + 1) * mode, j * mode:(j + 1) * mode] = sub_images[i * int(cols / mode) + j]
         # test
-        print(whole_matrix)
+        # print(whole_matrix)
         return whole_matrix
 
     def level_shift(self):
@@ -156,13 +156,13 @@ class DeCompressor:
                 elif matrix[i][j] > 255:
                     matrix[i][j] = 255
         # test
-        print(matrix)
+        # print(matrix)
         return matrix
 
     def write_to_pic(self):
         matrix = self.level_shift()
         img = Image.fromarray(np.uint8(matrix), 'L')
-        img.save(self.fname + 'restore.bmp')
+        img.save(self.fname + '.bmp')
 
     def scale_lq_mtx(self):
         matrix = self.jpeg_lq_matrix
@@ -174,10 +174,7 @@ class DeCompressor:
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
-    # complete mode : can choose block size and picture quality
-    # decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-    # test script mode: just for bash
-    decompressor = DeCompressor(sys.argv[1], 8, 1)
+    decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     # decompressor.scale_lq_mtx()
     decompressor.construct_dct()
     decompressor.write_to_pic()

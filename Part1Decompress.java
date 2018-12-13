@@ -25,10 +25,10 @@ class Part1Decompress{
     dd.decompress();
     String output = dd.getResult();
     try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-        new FileOutputStream(filename.split(Pattern.quote("."))[0] + "-" + "decompressed.csv"), "ISO-8859-15"))) {
+        new FileOutputStream(filename.split(Pattern.quote("."))[0] + ".csv"), "ISO-8859-15"))) {
         bw.write(output);
     }
     System.out.print(Message.NEW_COMMAND);
-    System.out.printf(Message.DECOMPRESS_FINISH.toString(), filename.split(Pattern.quote("."))[0] + "-" + "decompressed.csv");
+    System.out.printf(Message.DECOMPRESS_FINISH.toString(), filename.split(Pattern.quote("."))[0] + ".csv");
   }
 }
