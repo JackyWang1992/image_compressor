@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3461e5f1-7fed-494b-b51c-08042031da02" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Part1Compress.java" beforeDir="false" afterPath="$PROJECT_DIR$/Part1Compress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Part1Decompress.java" beforeDir="false" afterPath="$PROJECT_DIR$/Part1Decompress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compile.sh" beforeDir="false" afterPath="$PROJECT_DIR$/compile.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compressor.py" beforeDir="false" afterPath="$PROJECT_DIR$/compressor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decompressor.py" beforeDir="false" afterPath="$PROJECT_DIR$/decompressor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/high_quality_PSNR_50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/high_quality_PSNR_50.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/high_quality_PSNR_50.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/high_quality_PSNR_50.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/low_quality_PSNR_30.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/low_quality_PSNR_30.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/low_quality_PSNR_30.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/low_quality_PSNR_30.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medium_quality_PSNR_40.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/medium_quality_PSNR_40.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medium_quality_PSNR_40.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/medium_quality_PSNR_40.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out.csv.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/test.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/compressor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3042">
-              <caret line="123" column="31" lean-forward="true" selection-start-line="123" selection-start-column="31" selection-end-line="123" selection-end-column="31" />
+              <caret line="123" column="31" selection-start-line="123" selection-start-column="31" selection-end-line="123" selection-end-column="31" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <marker date="1544739739529" expanded="true" signature="3394:3433" ph="..." />
@@ -37,21 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1066">
+            <state relative-caret-position="149">
               <caret line="41" column="86" selection-start-line="41" selection-start-column="86" selection-end-line="41" selection-end-column="86" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="1092">
-                <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+                <caret line="42" selection-start-line="42" selection-end-line="42" />
               </first_editor>
               <second_editor />
             </state>
@@ -74,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/decompressor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4654">
-              <caret line="179" column="31" lean-forward="true" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
+              <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -253,16 +251,15 @@
       <workItem from="1544562186892" duration="9185000" />
       <workItem from="1544571500046" duration="23322000" />
       <workItem from="1544644930831" duration="17711000" />
-      <workItem from="1544708047323" duration="26597000" />
+      <workItem from="1544708047323" duration="27782000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126328000" />
+    <option name="totallyTimeSpent" value="127513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.102546915" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -435,17 +432,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1066">
-          <caret line="41" column="86" selection-start-line="41" selection-start-column="86" selection-end-line="41" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compressor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3042">
-          <caret line="123" column="31" lean-forward="true" selection-start-line="123" selection-start-column="31" selection-end-line="123" selection-end-column="31" />
+          <caret line="123" column="31" selection-start-line="123" selection-start-column="31" selection-end-line="123" selection-end-column="31" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <marker date="1544739739529" expanded="true" signature="3394:3433" ph="..." />
@@ -456,7 +446,7 @@
     <entry file="file://$PROJECT_DIR$/decompressor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4654">
-          <caret line="179" column="31" lean-forward="true" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
+          <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -467,9 +457,16 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="1092">
-            <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <caret line="42" selection-start-line="42" selection-end-line="42" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="41" column="86" selection-start-line="41" selection-start-column="86" selection-end-line="41" selection-end-column="86" />
         </state>
       </provider>
     </entry>
