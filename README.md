@@ -3,7 +3,6 @@ __Contributors:__
 - __[Jiaqi Wang](https://github.com/JackyWang1992)__ - wangjiaqi2017@brandeis.edu 
 
 ## how to compile my code?
-
 1. the part1 part is a java program, you need to compile the java file first, all you need to do is the 
     simple command below:
     ```bash
