@@ -193,9 +193,9 @@ class Compressor:
 if __name__ == '__main__':
     print("Welcome to my image compressor!")
     # complete mode : can choose block size and picture quality
-    compressor = Compressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    # compressor = Compressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     # test script mode: just for bash
-    # compressor = Compressor(sys.argv[1], 8, 1)
+    compressor = Compressor(sys.argv[1], 8, 1)
     # compressor.scale_lq_mtx()
     compressor.construct_dct()
     compressor.write_file()

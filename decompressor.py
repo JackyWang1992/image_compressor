@@ -174,7 +174,10 @@ class DeCompressor:
 
 if __name__ == '__main__':
     print("Welcome to my image decompressor!")
-    decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    # complete mode : can choose block size and picture quality
+    # decompressor = DeCompressor(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    # test script mode: just for bash
+    decompressor = DeCompressor(sys.argv[1], 8, 1)
     # decompressor.scale_lq_mtx()
     decompressor.construct_dct()
     decompressor.write_to_pic()
